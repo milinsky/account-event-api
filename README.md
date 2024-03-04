@@ -17,3 +17,16 @@ make build
 ```shell
 make up
 ```
+
+Api
+
+```POST http://localhost/api/account-event```
+```
+{
+    "account_id": 1,
+    "event_id": 1
+}
+
+```
+
+Панель RabbitMQ http://localhost:15672
