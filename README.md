@@ -18,7 +18,7 @@ make build
 make up
 ```
 
-Api
+### Работа с Api
 
 ```POST http://localhost/api/account-event```
 ```
