@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+
+  cli:
+    build:
+      context: ./
+      dockerfile: ./docker/php-cli/Dockerfile
+    volumes:
+      - .:/var/www
+      - ./docker/config/php:/usr/local/etc/php
+
+  worker:
+    build:
+      context: ./
+      dockerfile: docker/worker/Dockerfile
+    volumes:
+      - ./worker:/var/www
+      - ./docker/config/php:/usr/local/etc/php
+    restart: always
+    depends_on:
+      - cli
+      - rabbitmq
+    networks:
+      - default
+
+  api:
+    build:
+      context: ./
+      dockerfile: ./docker/api/Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./api:/var/www
+      - ./docker/config/php:/usr/local/etc/php
+    restart: always
+    depends_on:
+      - cli
+      - rabbitmq
+    networks:
+      - default
+
+  rabbitmq:
+    hostname: rabbitmq
+    image: rabbitmq:management
+    command:
+      - rabbitmq-server
+      - rabbitmq-plugins enable --offline rabbitmq_management
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    restart: always
+    ports:
+      - 15672:15672
+    networks:
+      - default
+
+  tank:
+    build:
+      context: ./
+      dockerfile: ./docker/tank/Dockerfile
+    volumes:
+      - ./tank:/var/www
+    restart: always
+    depends_on:
+      - cli
+      - api
+      - worker
+    networks:
+      - default
+

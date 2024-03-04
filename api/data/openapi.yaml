@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  title: Account events API
+  license:
+    name: Commercial
+    url: 'http://localhost'
+  description: API для обработки событий,
+  version: '1.0'
+  contact:
+    name: Mikhail Ilinsky
+    url: 'https://github.com/milinsky'
+    email: mail@milinsky.ru
+servers:
+  - url: 'http://localhost'
+    description: Test environment
+paths:
+  /api/account-event:
+    post:
+      summary: Обработка событий аккаунта
+      operationId: api/account-event
+      description: Обработка событий аккаунта по id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account_id:
+                  type: integer
+                  description: Идентификатор аккаунта
+                  example: 2
+                event_id:
+                  type: integer
+                  description: Идентификатор события
+                  example: 4
+              required:
+                - account_id
+                - event_id
+        description: ''
+      responses:
+        '200':
+          description: Ответ об успешно принятом в обработку событии
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                    description: Сообщение о результате обработки
+                    example: Событие успешно принято в обработку
+              examples:
+                Example 1:
+                  value:
+                    success: true
+                    message: Событие успешно принято в обработку
+        '500':
+          description: Произошла ошибка на сервере
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    success: false
+                    message: Произошла ошибка на сервере
+    parameters: []
