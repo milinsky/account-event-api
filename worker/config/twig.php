@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Duyler\TwigWrapper\Extensions\PhpSyntaxHighlightExtension;
 use Duyler\TwigWrapper\TwigConfigDto;
 use Duyler\Config\FileConfig;
 

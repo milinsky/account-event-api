@@ -14,7 +14,6 @@ use Override;
 
 class AckMessageStateHandler implements MainAfterStateHandlerInterface
 {
-
     #[Override]
     public function handle(StateMainAfterService $stateService, StateContext $context): void
     {

@@ -13,7 +13,7 @@ StateHandler::add(ListeningQueueStateHandler::class);
 StateHandler::add(
     class: ConnectToQueueStateHandler::class,
     providers: [
-        AMQPConnection::class =>AMQPConnectionProvider::class,
+        AMQPConnection::class => AMQPConnectionProvider::class,
     ],
 );
 StateHandler::add(AckMessageStateHandler::class);

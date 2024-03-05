@@ -26,7 +26,7 @@ class HandleAccountEventController extends AbstractController
 
         $exchange = new AMQPExchange($channel);
 
-        try{
+        try {
             $message = json_encode([
                 'account_id' => $requestModel->accountId,
                 'event_id' => $requestModel->eventId,
@@ -37,7 +37,7 @@ class HandleAccountEventController extends AbstractController
                 'status' => true,
                 'message' => 'Событие успешно принято в обработку',
             ]);
-        } catch (Exception $e){
+        } catch (Exception $e) {
             $this->connection->disconnect();
             return $this->json([
                 'status' => false,

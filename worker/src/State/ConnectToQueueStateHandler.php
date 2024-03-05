@@ -6,7 +6,6 @@ namespace App\State;
 
 use AMQPChannel;
 use AMQPConnection;
-use AMQPExchange;
 use AMQPQueue;
 use App\Config\AccountEventQueueConfig;
 use Duyler\EventBus\Contract\State\MainBeginStateHandlerInterface;
